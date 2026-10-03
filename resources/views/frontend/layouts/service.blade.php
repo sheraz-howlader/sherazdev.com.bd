@@ -1,30 +1,15 @@
-<section id="services" class="section bg-dark-2">
-    <div class="container px-lg-5">
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-            <h2 class="text-24 text-white-50 opacity-1 text-uppercase fw-600 w-100 mb-0">Services</h2>
-            <p class="text-9 text-white fw-600 position-absolute w-100 align-self-center lh-base mb-0">What I Do?
-                <span class="heading-separator-line border-bottom border-3 border-primary d-block mx-auto"></span>
-            </p>
-        </div>
-        <!-- Heading end-->
-
-        <div class="row">
-            <div class="col-lg-11 mx-auto">
-                <div class="row">
-                    @foreach($services as $service)
-                        <div class="col-md-6">
-                            <div class="featured-box style-3 mb-5">
-                                <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded">
-                                    <i class="{{ $service->icon }}"></i>
-                                </div>
-                                <h3 class="text-white"> {{ $service->title }} </h3>
-                                <p class="text-white-50 mb-0"> {{ $service->description }} </p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+<section id="services" class="panel content-panel">
+    <div class="panel-heading">
+        <h2><i class="fas fa-terminal"></i> What I do</h2>
+        <span>End-to-end solutions</span>
+    </div>
+    <div class="service-grid">
+        @foreach(config('cyber_portfolio.services') as $service)
+            <article class="service-card">
+                <div class="service-icon"><i class="{{ $service['icon'] }}"></i></div>
+                <h3>{{ $service['title'] }}</h3>
+                <p>{{ $service['description'] }}</p>
+            </article>
+        @endforeach
     </div>
 </section>

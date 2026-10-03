@@ -36,7 +36,7 @@ class HomeController extends Controller
         $services   = Service::all();
         $educations  = Education::where('status', true)->get();
         $experiences = Experience::where('status', true)->get();
-        $portfolios = Portfolio::all();
+        $portfolios = Portfolio::with('category')->get();
         $categories = Category::whereStatus(true)->get();
 
         return view('frontend.layouts.app', compact('user', 'about_me', 'services','educations','experiences','portfolios', 'categories'));

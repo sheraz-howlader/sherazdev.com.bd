@@ -1,52 +1,36 @@
-<header id="header" class="sticky-top">
-    <!-- Navbar -->
-    <nav class="primary-menu navbar navbar-expand-lg navbar-dark bg-dark border-bottom-0">
-        <div class="container-fluid position-relative h-100 flex-lg-column ps-3 px-lg-3 pt-lg-3 pb-lg-2">
+<button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+    <i class="fas fa-bars"></i>
+</button>
 
-            <!-- Logo -->
-            <a href="{{ route('public.home') }}" class="mb-lg-auto mt-lg-4">
-			<span class="bg-dark-2 rounded-pill p-2 mb-lg-1 d-none d-lg-inline-block">
-				<img class="img-fluid rounded-pill d-block" src="{{ asset($user?->profile_picture) }}"
-                     title="{{ $user?->full_name }}" alt="{{ $user?->full_name }}">
-			</span>
-                <h1 class="text-5 text-white text-center mb-0 d-lg-block"> {{ $user?->full_name }} </h1>
-            </a>
-            <!-- Logo End -->
+<aside class="cyber-sidebar">
+    <a class="brand" href="#home" aria-label="Back to home">
+        <span>SHERAZ<b>.H</b></span>
+        <small>Full Stack <i></i> Cloud <i></i> DevOps</small>
+    </a>
 
-            <div id="header-nav" class="collapse navbar-collapse w-100 my-lg-auto">
-                <ul class="navbar-nav text-lg-center my-lg-auto py-lg-3">
-                    <li class="nav-item"><a class="nav-link smooth-scroll active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About Me</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#services">What I Do</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#resume">Resume</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#testimonial">Testimonial</a></li>
-                    <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <ul class="social-icons social-icons-muted social-icons-sm mt-lg-auto ms-auto ms-lg-0 d-flex">
-                <li class="social-icons-facebook">
-                    <a data-bs-toggle="tooltip" title="Facebook" href="https://fb.com/md.sheraz.howlader/"
-                       target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-                <li class="social-icons-twitter">
-                    <a data-bs-toggle="tooltip" title="Twitter" href="https://twitter.com/sheraz_howlader"
-                       target="_blank">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="social-icons-github">
-                    <a data-bs-toggle="tooltip" title="GitHub" data-bs-placement="top"
-                       href="https://github.com/sheraz-howlader" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </li>
-            </ul>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav">
-                <span></span><span></span><span></span></button>
-        </div>
+    <nav class="cyber-nav" aria-label="Primary navigation">
+        <a class="active" href="#home"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="#about"><i class="far fa-user"></i><span>About</span></a>
+        <a href="#skills"><i class="fas fa-network-wired"></i><span>Skills</span></a>
+        <a href="#portfolio"><i class="fas fa-th-large"></i><span>Projects</span></a>
+        <a href="#case-studies"><i class="far fa-window-restore"></i><span>Case Studies</span></a>
+        <a href="#services"><i class="fas fa-microchip"></i><span>Services</span></a>
+        <a href="#journey"><i class="fas fa-briefcase"></i><span>Experience</span></a>
+        <a href="#contact"><i class="far fa-newspaper"></i><span>Blog</span></a>
+        <a href="#contact"><i class="far fa-envelope"></i><span>Contact</span></a>
     </nav>
-    <!-- Navbar End -->
-</header>
+
+    <a class="sidebar-cta" href="#contact">Let's Work Together <i class="fas fa-arrow-up"></i></a>
+
+    <div class="sidebar-bottom">
+        <p><i></i> Available for<br>New Opportunities</p>
+        <div class="sidebar-socials">
+            <a href="https://github.com/sheraz-howlader" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://twitter.com/sheraz_howlader" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:{{ config('cyber_portfolio.profile.email') }}" aria-label="Email"><i class="far fa-envelope"></i></a>
+        </div>
+        <small>© {{ date('Y') }} {{ config('cyber_portfolio.profile.name') }}<br>All rights reserved.</small>
+        <span class="terminal-prompt">&gt;_</span>
+    </div>
+</aside>

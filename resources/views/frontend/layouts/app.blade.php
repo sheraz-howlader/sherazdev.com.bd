@@ -1,255 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset($setting->icon) }}" rel="icon"/>
-    <title> {{ $setting->meta_title }} </title>
-    <meta name="description" content="{{ $setting->meta_description }}">
-    <meta name="keywords" content="{{ $setting->meta_keyword }}">
-    <meta name="author" content="sherazdev.com">
-
-    <!-- Web Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Stylesheet
-    ============================== -->
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/') }}/vendor/bootstrap/css/bootstrap.min.css"/>
-    <!-- Font Awesome Icon -->
+    <meta name="theme-color" content="#020b14">
+    <link href="{{ asset($setting?->icon) }}" rel="icon">
+    <title>{{ $setting?->meta_title ?? config('app.name') }}</title>
+    <meta name="description" content="{{ $setting?->meta_description }}">
+    <meta name="keywords" content="{{ $setting?->meta_keyword }}">
+    <meta name="author" content="{{ $user?->full_name }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/font-awesome/css/all.min.css') }}">
     <script src="https://kit.fontawesome.com/7b81d78297.js" crossorigin="anonymous"></script>
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('frontend/') }}/vendor/owl.carousel/assets/owl.carousel.min.css"/>
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('frontend/') }}/vendor/magnific-popup/magnific-popup.min.css"/>
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/') }}/css/stylesheet.css"/>
-    <!-- Colors Css -->
-    <link id="color-switcher" type="text/css" rel="stylesheet" href="#"/>
-    <style>
-        @if(!config('app.debug'))
-            /* Disable text selection */
-            body{
-                -webkit-user-select: none; /* Safari */
-                -ms-user-select: none; /* IE 10 and IE 11 */
-                user-select: none; /* Standard syntax */
-            }
-        @endif
-    </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HL9Z11S2Z"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-9HL9Z11S2Z');
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5XNRFNP5');</script>
-    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/magnific-popup/magnific-popup.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/cyber-portfolio.css') }}">
 </head>
-
-<body class="side-header" data-bs-spy="scroll" data-bs-target="#header-nav" data-bs-offset="1">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XNRFNP5"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-<!-- Start::Preloader -->
-<div class="preloader preloader-dark">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<!-- End::Preloader -->
-
-<div id="main-wrapper">
-    <!-- Start::Header & Sidebar -->
+<body>
+<div class="cyber-site">
     @include('frontend.layouts.sidebar')
-    <!-- End::Header & Sidebar-->
 
-    <!-- Start::Content -->
-    <div id="content" role="main">
-        <!-- Start::Intro -->
-        <section id="home">
-            <div class="hero-wrap">
-                <div class="hero-mask opacity-8 bg-dark"></div>
+    <main class="dashboard" id="main-content">
+        <header class="panel dashboard-topbar">
+            <span class="terminal-user"><i class="fas fa-terminal"></i> sheraz@portfolio:~$</span>
+            <span class="topbar-message">{{ config('cyber_portfolio.profile.tagline') }}</span>
+            <div class="terminal-meta">
+                <span><i class="fas fa-map-marker-alt"></i> {{ config('cyber_portfolio.profile.location') }}</span>
+                <span><i class="far fa-calendar-alt"></i> <b id="local-time">Local time</b></span>
+                <span class="online-dot"></span>
+            </div>
+            <a href="{{ asset($user?->resume ?? 'frontend/sheraz-howlader.pdf') }}" target="_blank" rel="noopener">Download CV <i class="fas fa-download"></i></a>
+        </header>
 
-                <div class="hero-bg parallax" style="background-image:url({{ asset($setting?->thumbnail) }})"></div>
-
-                <div class="hero-content section d-flex min-vh-100">
-                    <div class="container my-auto">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <div class="typed-strings">
-                                    <p>I'm {{ $user?->full_name }}</p>
-                                    <p>I'm a {{ $setting?->hero_type_writer }}.</p>
-                                </div>
-                                <p class="text-7 fw-500 text-white mb-2 mb-md-3">Welcome</p>
-                                <h2 class="text-16 fw-600 text-white mb-2 mb-md-3"><span class="typed"></span></h2>
-                                <p class="text-5 text-light mb-4"> Based in Bangladesh. </p>
-                                <a href="#contact"
-                                   class="btn btn-outline-primary rounded-pill shadow-none smooth-scroll mt-2">
-                                    Hire Me
-                                </a>
-                            </div>
-                        </div>
+        <div class="dashboard-split">
+            <div class="dashboard-part dashboard-part-left">
+                <section id="home" class="panel hero-panel">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">{{ config('cyber_portfolio.hero.eyebrow') }}</span>
+                    <h1>Building systems<br>behind the <span>interface.</span><i class="cursor"></i></h1>
+                    <p>{{ config('cyber_portfolio.hero.description') }}</p>
+                    <div class="hero-actions">
+                        <a class="btn-primary-cyber" href="#portfolio">View my work <i class="fas fa-arrow-right"></i></a>
+                        <a class="btn-ghost-cyber" href="{{ asset($user?->resume ?? 'frontend/sheraz-howlader.pdf') }}" target="_blank" rel="noopener">Download CV <i class="fas fa-download"></i></a>
                     </div>
-                    <a href="#about" class="scroll-down-arrow text-white smooth-scroll">
-                        <span class="animated">
-                            <i class="fa fa-chevron-down"></i>
-                        </span>
-                    </a>
+                </div>
+                <div class="hero-visual">
+                    <div class="profile-halo"></div>
+                    <img src="{{ asset('frontend/images/profile-cutout.png') }}" alt="Portrait of {{ $user?->full_name }}">
+                    <div class="experience-badge"><strong>0+</strong><span>{{ config('cyber_portfolio.profile.availability') }}</span><i></i></div>
+                    <div class="hero-identity"><strong>{{ config('cyber_portfolio.profile.name') }}</strong><span>Full Stack Developer<br>&amp; Infrastructure Engineer</span></div>
                 </div>
             </div>
-        </section>
-        <!-- End::Intro -->
 
-        <!-- Start::About -->
-        @include('frontend.layouts.about')
-        <!-- End::About -->
+            <div class="metric-strip">
+                @foreach(config('cyber_portfolio.metrics') as $metric)
+                    <div><i class="{{ $metric['icon'] }}"></i><strong>{{ $metric['value'] }}</strong><span>{{ $metric['label'] }}</span></div>
+                @endforeach
+            </div>
+                </section>
 
-        <!-- Start::Services -->
-        @include('frontend.layouts.service')
-        <!-- End::Services -->
+                @include('frontend.layouts.education')
+                @include('frontend.layouts.portfolio')
+                @include('frontend.layouts.experience')
+            </div>
 
-        <!-- Start::Education -->
-        @include('frontend.layouts.education')
-        <!-- End::Education -->
-
-        <!-- Start::Portfolio -->
-        @include('frontend.layouts.portfolio')
-        <!-- End::Portfolio -->
-
-        <!-- Start::Testimonial -->
-        @include('frontend.layouts.testimonial')
-        <!-- End::Testimonial -->
-
-        <!-- Start::Contact -->
-        @include('frontend.layouts.contact')
-        <!-- End::Contact -->
-    </div>
-    <!-- End::Content -->
-
-    <!-- Start::Footer -->
-    <footer id="" class="footer-dark bg-dark-1 p-4" style="color: rgba(250, 250, 250, 0.8)">
-        <div class="container px-lg-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <p class="mb-lg-0">Copyright © {{ date('Y') }}
-                        <a href="https://github.com/sherazHowlader" class="fw-500" target="_blank">{{ config('app.name')  }}</a>. All Rights Reserved.
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-separator nav-separator-light justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: rgba(250, 250, 250, 0.8)" data-bs-toggle="modal"
-                               data-bs-target="#terms-policy" href="#">Terms & Policy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: rgba(250, 250, 250, 0.8)" data-bs-toggle="modal"
-                               data-bs-target="#disclaimer" href="#">Disclaimer</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="dashboard-part dashboard-part-right">
+                @include('frontend.layouts.case-studies')
+                @include('frontend.layouts.service')
+                @include('frontend.layouts.about')
+                @include('frontend.layouts.contact')
             </div>
         </div>
-    </footer>
-    <!-- End::Footer -->
+
+    </main>
 </div>
 
-<!-- Start::Back to Top-->
-<a id="back-to-top" class="rounded-circle" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)">
-    <i class="fa fa-chevron-up"></i>
-</a>
-<!-- End::Back to Top-->
-
-<!-- Start::Terms & Policy Modal -->
 @include('frontend.layouts.privacy-policy')
-<!-- End::Terms & Policy Modal -->
-
-<!-- Start::Disclaimer Modal -->
 @include('frontend.layouts.disclaimer')
-<!-- End::Disclaimer Modal -->
 
-<!-- JavaScript -->
-<script src="{{ asset('frontend/') }}/vendor/jquery/jquery.min.js"></script>
-<script src="{{ asset('frontend/') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Easing -->
-<script src="{{ asset('frontend/') }}/vendor/jquery.easing/jquery.easing.min.js"></script>
-<!-- Appear -->
-<script src="{{ asset('frontend/') }}/vendor/jquery.appear/jquery.appear.min.js"></script>
-<!-- Images Loaded -->
-<script src="{{ asset('frontend/') }}/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-<!-- Counter -->
-<script src="{{ asset('frontend/') }}/vendor/jquery.countTo/jquery.countTo.min.js"></script>
-<!-- Parallax Bg -->
-<script src="{{ asset('frontend/') }}/vendor/parallaxie/parallaxie.min.js"></script>
-<!-- Typed -->
-<script src="{{ asset('frontend/') }}/vendor/typed/typed.min.js"></script>
-<!-- Owl Carousel -->
-<script src="{{ asset('frontend/') }}/vendor/owl.carousel/owl.carousel.min.js"></script>
-<!-- isotope Portfolio Filter -->
-<script src="{{ asset('frontend/') }}/vendor/isotope/isotope.pkgd.min.js"></script>
-<!-- Magnific Popup -->
-<script src="{{ asset('frontend/') }}/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-<!-- Style Switcher -->
-<script src="{{ asset('frontend/') }}/js/switcher.min.js"></script>
-<!-- Custom Script -->
-<script src="{{ asset('frontend/') }}/js/theme.js"></script>
-
+<script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('frontend/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 <script>
-    @if(!config('app.debug'))
-        // Disable right-click
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.querySelector('.nav-toggle');
+        const sidebar = document.querySelector('.cyber-sidebar');
+        const navLinks = document.querySelectorAll('.cyber-nav a');
+        const timeTarget = document.getElementById('local-time');
+
+        navToggle?.addEventListener('click', function () {
+            const isOpen = sidebar.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
         });
 
-        // Disable copy, cut & paste
-        document.addEventListener('copy', function (e) {
-            e.preventDefault();
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                sidebar.classList.remove('is-open');
+                navToggle?.setAttribute('aria-expanded', 'false');
+            });
         });
 
-        document.addEventListener('cut', function (e) {
-            e.preventDefault();
-        });
+        function updateClock() {
+            if (!timeTarget) return;
+            timeTarget.textContent = new Intl.DateTimeFormat('en-US', {
+                weekday: 'short', month: 'short', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', hour12: true,
+                timeZone: 'Asia/Dhaka'
+            }).format(new Date());
+        }
 
-        document.addEventListener('paste', function (e) {
-            e.preventDefault();
-        });
+        updateClock();
+        window.setInterval(updateClock, 30000);
 
+        const sections = document.querySelectorAll('section[id]');
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                navLinks.forEach(function (link) {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                });
+            });
+        }, { rootMargin: '-25% 0px -65% 0px' });
+        sections.forEach(function (section) { observer.observe(section); });
 
-        // Disable Ctrl+U
-        document.addEventListener('keydown', function (e) {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        // Disable Ctrl+Shift+I
-        document.addEventListener('keydown', function (e) {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-            }
-        });
-    @endif
+        $('.popup-ajax').magnificPopup({ type: 'ajax', closeBtnInside: true });
+    });
 </script>
 @stack('script')
 @routes
